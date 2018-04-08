@@ -17,12 +17,21 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
+//mostrar competencias
 app.get('/competencias', competenciaControlador.listarCompetencias);
+app.get('/competencias/:id', competenciaControlador.obtenerCompetencia);
 app.get('/competencias/:id/peliculas', competenciaControlador.listarPeliculasAzar);
 app.get('/competencias/:id/resultados',votosControlador.masVotados);
 
+//agregar competencia
 app.post('/competencias', competenciaControlador.agregarCompetencia);   
+
+//agregar voto
 app.post('/competencias/:id/voto', votosControlador.agregarVoto);
+
+//editar competencia
+
+app.put('/competencias/id', competenciaControlador.editarCompetencia);
 
 app.get('/generos',administrarControlador.listarGeneros);
 

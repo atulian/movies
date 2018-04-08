@@ -19,13 +19,68 @@ var controller = {
 
             res.json(resultado);
         })
+    },
 
+    editarCompetencia: function(req,res){
+        var id = req.params.id;
+
+
+        if(!id){
+            console.log('No existe');
+            return res.status(404).send('No existe');
+        }
+
+        var nombre = req.body.nombre;
+        var genero = req.body.genero;
+        var actor = req.body.actor;
+        var director = req.body.director;
+
+        var sql = "UPDATE competencia SET descripcion = ? , idGenero = ? , idActor = ? , idDirector = ? WHERE id = " + id;
+ 
+        con.query(sql, [nombre,genero,actor,director], function(err,resultado,field){
+            if (err) {
+                console.log("Ocurrio un error en la consulta", err.message);
+                return res.status(404).send("Hubo un error en consulta");
+            }
+
+            res.json(resultado);
+        });
+
+    },
+
+    obtenerCompetencia: function(req,res){
+        var id = req.params.id;
+        console.log(id);
+        
+        if(!id){
+            console.log('No existe');
+            return res.status(404).send('No existe');
+        }
+
+        var sql = "SELECT C.descripcion as nombre, A.nombre as actor_nombre, D.nombre as director_nombre, G.nombre as genero_nombre"
+        sql += " FROM competencia C LEFT JOIN genero G ON C.idGenero = G.id"
+        sql += " LEFT JOIN actor A on C.idActor = A.id"
+        sql += " LEFT JOIN director D ON C.idDirector = D.id  WHERE C.id = ?";
+
+        console.log(sql);
+
+        con.query(sql,[id], function(err,resultado,field){
+            if (err){
+                console.log("Ocurrio un error en la consulta", err.message);
+                return res.status(404).send("Hubo un error en consulta");
+            }
+
+            res.json(resultado[0]);
+
+        });
 
     },
 
 
     listarCompetencias: function (req,res){
         var sql = "SELECT * FROM Competencia";
+
+        console.log(sql);
         con.query(sql,function(err,resultado,field){
             if(err){
                 console.log("Ocurrio un error en la consulta", err.message);

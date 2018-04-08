@@ -4,6 +4,7 @@ var con = require('../conexion_bd.js');
 var controller = {
 
     listarGeneros : function (req,res){
+
         var sql = "SELECT * FROM genero";
 
         con.query(sql,function(err,resultado,field){
