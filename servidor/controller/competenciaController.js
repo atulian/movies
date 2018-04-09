@@ -76,6 +76,29 @@ var controller = {
 
     },
 
+    eliminarCompetencia: function(req,res){
+        var id = req.params.id;
+
+        if (!id){
+            console.log('No existe');
+            res.status(404).send('No existe');
+        }
+
+        var sql = "DELETE FROM Competencia WHERE id = ?"
+        
+        con.query(sql,[id], function(err,resultado,field){
+
+            if (err){
+                console.log('Hubo un error');
+                res.status(404).send("Hubo un error en la consulta");
+            }
+
+            res.send('Eliminado correctamente');
+
+        });
+        
+    },
+
 
     listarCompetencias: function (req,res){
         var sql = "SELECT * FROM Competencia";

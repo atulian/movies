@@ -17,7 +17,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-//mostrar competencias
 app.get('/competencias', competenciaControlador.listarCompetencias);
 app.get('/competencias/:id', competenciaControlador.obtenerCompetencia);
 app.get('/competencias/:id/peliculas', competenciaControlador.listarPeliculasAzar);
@@ -29,9 +28,9 @@ app.post('/competencias', competenciaControlador.agregarCompetencia);
 //agregar voto
 app.post('/competencias/:id/voto', votosControlador.agregarVoto);
 
-//editar competencia
+app.put('/competencias/:id', competenciaControlador.editarCompetencia);
 
-app.put('/competencias/id', competenciaControlador.editarCompetencia);
+app.delete('/competencias/:id', competenciaControlador.eliminarCompetencia);
 
 app.get('/generos',administrarControlador.listarGeneros);
 
