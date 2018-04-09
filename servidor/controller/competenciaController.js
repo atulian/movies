@@ -50,11 +50,10 @@ var controller = {
 
     obtenerCompetencia: function(req,res){
         var id = req.params.id;
-        console.log(id);
         
         if(!id){
-            console.log('No existe');
-            return res.status(404).send('No existe');
+            console.log("No existe");
+            return res.status(404).send("No existe");
         }
 
         var sql = "SELECT C.descripcion as nombre, A.nombre as actor_nombre, D.nombre as director_nombre, G.nombre as genero_nombre"
@@ -80,7 +79,7 @@ var controller = {
 
         if (!id){
             console.log('No existe');
-            res.status(404).send('No existe');
+            return res.status(404).send('No existe');
         }
 
         var sql = "DELETE FROM Competencia WHERE id = ?"
@@ -89,10 +88,10 @@ var controller = {
 
             if (err){
                 console.log('Hubo un error');
-                res.status(404).send("Hubo un error en la consulta");
+                return res.status(404).send("Hubo un error en la consulta");
             }
 
-            res.send('Eliminado correctamente');
+            res.send('Competencia eliminada correctamente');
 
         });
         
@@ -115,6 +114,28 @@ var controller = {
 
             res.json(resultado);
         });
+    },
+
+    eliminarVotos: function(req,res){
+        var idCompetencia = req.params.id;
+
+        if (!idCompetencia){
+            console.log("No existe");
+            return res.status(404).send("No existe");
+        }
+
+        var sql = "DELETE FROM Votos WHERE idCompetencia = ?";
+
+        con.query(sql,[idCompetencia],function(err,resultado,field){
+
+            if (err){
+                console.log("Ocurrio un error");
+                return res.status(404).send("Ocurrio un error");
+            }
+
+            res.send("Votos eliminados correctamente");
+        });
+
     },
 
     listarPeliculasAzar: function (req,res){

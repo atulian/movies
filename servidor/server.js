@@ -31,6 +31,7 @@ app.post('/competencias/:id/voto', votosControlador.agregarVoto);
 app.put('/competencias/:id', competenciaControlador.editarCompetencia);
 
 app.delete('/competencias/:id', competenciaControlador.eliminarCompetencia);
+app.delete('/competencias/:id/votos', competenciaControlador.eliminarVotos);
 
 app.get('/generos',administrarControlador.listarGeneros);
 
