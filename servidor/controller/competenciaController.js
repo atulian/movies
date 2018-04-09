@@ -62,7 +62,6 @@ var controller = {
         sql += " LEFT JOIN actor A on C.idActor = A.id"
         sql += " LEFT JOIN director D ON C.idDirector = D.id  WHERE C.id = ?";
 
-        console.log(sql);
 
         con.query(sql,[id], function(err,resultado,field){
             if (err){
@@ -103,7 +102,6 @@ var controller = {
     listarCompetencias: function (req,res){
         var sql = "SELECT * FROM Competencia";
 
-        console.log(sql);
         con.query(sql,function(err,resultado,field){
             if(err){
                 console.log("Ocurrio un error en la consulta", err.message);
