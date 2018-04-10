@@ -68,6 +68,19 @@ var controller = {
                 return res.status(404).send("Hubo un error en consulta");
             }
 
+            if (resultado[0].actor_nombre == null){
+                resultado[0].actor_nombre = "Todos/as";
+            }
+
+            if (resultado[0].director_nombre == null){
+                resultado[0].director_nombre = "Todos/as";
+            }
+
+            if (resultado[0].genero_nombre == null){
+                resultado[0].genero_nombre = "Todos/as";
+            }
+
+            console.log(resultado[0]);
             res.json(resultado[0]);
 
         });
